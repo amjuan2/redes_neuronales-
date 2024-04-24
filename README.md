@@ -16,7 +16,7 @@ El archivo `main` contiene el ejercicio final del proyecto. Aquí se puede mostr
 
 ## Notas
 
-- **Nota 1:** Descripción de algún concepto importante.
+- **Nota 1:** Descripción de algún concepto importante. 
 - **Nota 2:** Explicación de algún fragmento de código complicado.
 - **Nota 3:** Referencia a recursos adicionales para ampliar el conocimiento.
 
