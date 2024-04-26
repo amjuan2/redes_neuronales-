@@ -7,8 +7,6 @@ from src.reconocimientoimagenes import model
 (train_images, train_labels), (test_images, test_labels) = tf.keras.datasets.mnist.load_data()
 
 # Normalizar los valores de píxeles al rango [0, 1]
-#Normalizar los píxeles ayuda a evitar problemas de divergencia o convergencia lenta durante el entrenamiento,
-# especialmente en modelos que utilizan gradientes para ajustar los pesos.
 train_images, test_images = train_images / 255.0, test_images / 255.0
 
 # Seleccionar una imagen de prueba

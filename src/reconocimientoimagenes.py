@@ -8,6 +8,8 @@ from tensorflow.keras.datasets import mnist
 (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
 
 # Normalizar los valores de píxeles al rango [0, 1]
+#Normalizar los píxeles ayuda a evitar problemas de divergencia o convergencia lenta durante el entrenamiento,
+# especialmente en modelos que utilizan gradientes para ajustar los pesos.
 train_images, test_images = train_images / 255.0, test_images / 255.0
 
 # Agregar una dimensión extra para el canal de color (escala de grises)
