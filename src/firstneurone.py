@@ -1,14 +1,25 @@
+#Proporciona una infraestructura flexible y eficiente para definir y entrenar redes neuronales, así como para realizar operaciones matemáticas de alto rendimiento.
 import tensorflow as tf
+#Proporciona soporte para arrays multidimensionales y matrices, así como una amplia colección de funciones matemáticas de alto nivel para operar en estos arrays.
 import numpy as np
+#El módulo pyplot proporciona una interfaz para crear gráficos de forma sencilla y rápida, imitando la funcionalidad de MATLAB.
 import matplotlib.pyplot as plt
 
 #ejemplos de entradas y salidas
-celsius = np.array([-40,-10,0,8,15,22,38],dtype=float)
-fahrenheit = np.array([-40,14,32,46,59,72,100],dtype=float)
+#los datos de entrada deben coincidir con los resultados para que de esta
+# manera se pueda hacer match entra cada uno
+celsius = np.array([-40,-10,0,8,15,22,38],dtype=float) #resultados
+fahrenheit = np.array([-40,14,32,46,59,72,100],dtype=float) #respuestas
 
-#se cran las capas dense es para que sepa que se va aconectar con el numero de neuronas de la capa siguiente en este caso 1 units input_shape 1 entrada
+#se cran las capas dense es para que sepa que se va aconectar con el numero
+# de neuronas de la capa siguiente en este caso 1 units input_shape 1 entrada
 capa=tf.keras.layers.Dense(units=1,input_shape=[1])
 #modelo secuencial para redes simples
+# se puedes anidar modelos secuenciales para construir modelos más complejos.
+#Un ejemplo práctico donde se necesiten anidar modelos es cuando deseas crear
+# un modelo compuesto por submodelos que tienen propósitos diferentes. Por ejemplo,
+# en un modelo de visión por computadora, puedes tener un submodelo para extraer
+# características de una imagen y otro submodelo para clasificar esas características extraídas.
 modelo= tf.keras.Sequential([capa])
 
 #prepara modelo para ser entrenado, se usa el algoritmo adam para que mejore(optimizer) permite ajustar pesos y sesgos para que aprendan
@@ -37,6 +48,54 @@ Esta métrica se utiliza comúnmente en problemas de clasificación multiclase. 
 Entropía Cruzada Binaria (Binary Crossentropy, 'binary_crossentropy'):
 Similar a la entropía cruzada categórica, pero se utiliza en problemas de clasificación binaria.
 '''
+'''
+Adam:
+Aplicaciones Generales: Adam es un optimizador muy versátil y funciona bien en una amplia 
+gama de problemas de aprendizaje profundo. Si no estás seguro de qué optimizador elegir, 
+Adam es una buena opción para comenzar.
+Redes Neuronales Convolucionales (CNN): Adam es adecuado para entrenar CNNs en problemas 
+de visión por computadora, como clasificación de imágenes.
+Redes Neuronales Recurrentes (RNN): Funciona bien para entrenar RNNs en tareas de 
+procesamiento de lenguaje natural (NLP), como generación de texto o traducción automática.
+
+Stochastic Gradient Descent (SGD):
+Problemas con Conjuntos de Datos Pequeños: En conjuntos de datos pequeños, 
+SGD puede ser más efectivo que Adam ya que tiene menos fluctuaciones y ruido 
+en la dirección del gradiente.
+Problemas de Optimización Personalizados: Si necesitas una implementación de 
+optimización personalizada o un control fino sobre la tasa de aprendizaje y el momentum, 
+puedes utilizar SGD.
+
+RMSprop:
+Problemas con Gradientes Escasos: RMSprop es útil en problemas donde los gradientes son 
+muy variables o escasos, como en el entrenamiento de modelos de lenguaje basados en palabras.
+Redes Neuronales Recurrentes (RNN): Funciona bien para entrenar RNNs en problemas de secuencia, 
+ya que puede adaptarse a gradientes cambiantes.
+
+Adagrad:
+Problemas con Características Escaladas de Manera Diferente: Adagrad es útil cuando las 
+características de entrada varían en escalas muy diferentes.
+Redes Neuronales con Sparse Data: Es adecuado para problemas donde los datos son escasos y 
+los gradientes son muy variables.
+
+Adadelta:
+Problemas con Tasa de Aprendizaje Adaptable: Adadelta es útil cuando deseas un método 
+de optimización que no requiere ajuste manual de la tasa de aprendizaje.
+Entrenamiento de Redes Neuronales Profundas (DNN): Funciona bien en problemas de 
+aprendizaje profundo con redes neuronales profundas.
+
+Nadam:
+Problemas con Grandes Conjuntos de Datos: Nadam es una buena opción para problemas 
+con grandes conjuntos de datos, ya que combina las ventajas de Adam y RMSprop.
+Redes Neuronales con Parametrización Sensible a la Escala: Funciona bien en problemas 
+donde la escala de los parámetros puede afectar significativamente el rendimiento del modelo.
+
+Adamax:
+Redes Neuronales con Grandes Dimensiones: Adamax es adecuado para modelos con un gran 
+número de parámetros, como en el entrenamiento de redes neuronales profundas con muchas capas.
+Problemas de Aprendizaje a Escala: Es útil en problemas donde la escalabilidad es importante
+ y se necesita una convergencia rápida.
+'''
 modelo.compile(
     optimizer=tf.keras.optimizers.Adam(0.1),
     loss='mean_squared_error'
@@ -48,7 +107,6 @@ print("modelo entrenado")
 
 
 #insertar datos reales
-print("predict")
 entrada_prediccion = np.array([100, 0])
 resultado = modelo.predict(entrada_prediccion.reshape(-1, 1))  # Aseguramos que la entrada sea un array de dos dimensiones
 print("El resultado es: " + str(resultado) + " Fahrenheit")
@@ -58,7 +116,7 @@ print(capa.get_weights())
 
 
 #graficar resultados funcion perdida uqe tanmal esta por vuelta
-plt.xlabel("# Epoca")
+plt.xlabel("# vuelta")
 plt.ylabel("Magnitud de pérdida")
 plt.plot(historial.history["loss"])
 plt.legend()

@@ -1,8 +1,5 @@
-#Proporciona soporte para arrays multidimensionales y matrices, así como una amplia colección de funciones matemáticas de alto nivel para operar en estos arrays.
 import numpy as np
-#Proporciona una infraestructura flexible y eficiente para definir y entrenar redes neuronales, así como para realizar operaciones matemáticas de alto rendimiento.
 import tensorflow as tf
-#El módulo pyplot proporciona una interfaz para crear gráficos de forma sencilla y rápida, imitando la funcionalidad de MATLAB.
 import matplotlib.pyplot as plt
 
 # Función a modelar: por ejemplo, y = sin(x)
