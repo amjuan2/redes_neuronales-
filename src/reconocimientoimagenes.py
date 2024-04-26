@@ -15,12 +15,17 @@ train_images = train_images[..., tf.newaxis]
 test_images = test_images[..., tf.newaxis]
 
 # Crear el modelo de la red neuronal convolucional
+# Crea un modelo secuencial, donde las capas se apilan una encima de la otra en secuencia.
 model = models.Sequential([
+    #Capa de convolución 2D, que aplica filtros convolucionales a las imágenes.
     layers.Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+    #Capa de convolución 2D, que aplica filtros convolucionales a las imágenes.
     layers.MaxPooling2D((2, 2)),
     layers.Conv2D(64, (3, 3), activation='relu'),
     layers.MaxPooling2D((2, 2)),
     layers.Conv2D(64, (3, 3), activation='relu'),
+    # Capa de aplanado, que convierte los mapas de características 2D en un vector
+    # 1D para que puedan ser alimentados a capas densas.
     layers.Flatten(),
     layers.Dense(64, activation='relu'),
     layers.Dense(10, activation='softmax')  # 10 nodos de salida para los 10 dígitos
